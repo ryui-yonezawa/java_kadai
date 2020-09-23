@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  display: table;
+}
+
+body {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+button{
+	text-align: right;
+	margin-left: 220px;
+}
+
+form{
+	margin-top: 3em;
+	text-align: left;
+	display: inline-block;
+}
+
+r{
+	margin-top: 10px;
+	display: inline-block;
+}
+
+table {
+	text-align: center;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+    table-layout: fixed;
+}
+
+
+table tr:nth-child(odd) td {background: #c8f7f5;}
+
+table td {
+	background-color: #ebfcfb;
+}
+
+.num:nth-child(odd){background: #00ff00;}
+
+
+table th, table td {
+     border: 1px solid #fff;
+     padding: 10px;
+     width: 190px;
+     text-align: center;
+     width: auto !important;
+}
+
+table th {background-color: #59c1ff;}
+
+table num td{background-color: #ebfcfb;}
+
+
+.text:nth-child(odd){
+	text-align: left;
+	white-space: pre-wrap;
+	word-break: break-all;
+	background-color: #ffc6aa;
+}
+
+.under {
+  text-decoration: underline;
+  max-width: 100px;
+}
+
+.Unull:nth-child(odd){
+	background-color: rgba(0,0,0,0);
+  	border-bottom: 3px solid black;
+}
+
+.Unull{
+	background-color: rgba(0,0,0,0);
+  	border-bottom: 3px solid black;
+}
+
+.null:nth-child(odd){background-color: rgba(0,0,0,0);}
+
+.null{background-color: rgba(0,0,0,0);}
+
+
+.tbutton{background-color: #ff0000;}
