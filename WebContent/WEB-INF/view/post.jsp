@@ -25,7 +25,7 @@
         内容<br>
         <textarea type="text" style="width:300px;height:100px;" name="text" wrap="hard"></textarea><br>
 
-     	ファイル<br>
+     	画像ファイル<br>
      	<input type="radio" id = "Cfile" name="Cfile" value="選択"
 			onclick="document.getElementById('xyz').style.display = 'inline-block';"
 			>ファイル選択
