@@ -1,8 +1,5 @@
 package dao;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -56,6 +53,8 @@ public class DaoText {
 
 			}
 
+//			sql = "INSERT INTO bulletinboard(name,mail,text) VALUES(?,?,?)";
+
 			//⑥SQLを実行するための準備(構文解析)
 			pstmt = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
 
@@ -65,7 +64,11 @@ public class DaoText {
 			pstmt.setString(1, s.getName());
 			pstmt.setString(2, s.getMail());
 			pstmt.setString(3, s.getText());
-			pstmt.setBlob(4, s.getFile());
+
+			if(s.getFile() != null){
+				pstmt.setString(4, s.getFile());
+			}
+//			pstmt.setBlob(4, s.getFile());
 
 			//⑧SQLを実行し、DBから結果を受領する
 			int result = pstmt.executeUpdate();
@@ -113,7 +116,7 @@ public class DaoText {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		byte[] file = null;
+//		byte[] file = null;
 
 		try{
 			//JDBCドライバをロードする
@@ -145,24 +148,28 @@ public class DaoText {
 				String mail = rs.getString("mail");
 				String text = rs.getString("text");
 
-				try {
-					InputStream is = rs.getBinaryStream("file");
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					byte[] bs = new byte[1024];
-					int size = 0;
+				String file = rs.getString("file");
 
+//				File file = rs.getFile("file");
 
-					while( ( size = is.read( bs ) ) != -1 ){
-						baos.write( bs, 0, size );
-					}
-
-					file = baos.toByteArray();  //. byte[] 型に変換してデータを取得
-
-				} catch (IOException e) {
-					// TODO 自動生成された catch ブロック
-					e.printStackTrace();
-					System.out.println("error");
-				}
+//				try {
+//					InputStream is = rs.getBinaryStream("file");
+//					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//					byte[] bs = new byte[1024];
+//					int size = 0;
+//
+//
+//					while( ( size = is.read( bs ) ) != -1 ){
+//						baos.write( bs, 0, size );
+//					}
+//
+//					file = baos.toByteArray();  //. byte[] 型に変換してデータを取得
+//
+//				} catch (IOException e) {
+//					// TODO 自動生成された catch ブロック
+//					e.printStackTrace();
+//					System.out.println("error");
+//				}
 
 
 				String insert_time = rs.getString("insert_time");
@@ -252,7 +259,10 @@ public class DaoText {
 				String name = rs.getString("name");
 				String mail = rs.getString("mail");
 				String text = rs.getString("text");
-				InputStream file = (InputStream) rs.getBlob("file");
+
+				String file = rs.getString("file");
+//				InputStream file = (InputStream) rs.getBlob("file");
+
 				String insert_time = rs.getString("insert_time");
 				String updated_time = rs.getString("updated_time");
 
@@ -436,7 +446,8 @@ public class DaoText {
 			//⑤SQL文の元を作成する
 			//?をプレースホルダと言います。
 			//後の手順で?に値を設定します。
-			String sql = "UPDATE bulletinboard SET name = ?,mail = ?,text = ? WHERE no = ?";
+			String sql = "UPDATE bulletinboard SET name = ?,mail = ?,text = ?, file = ? WHERE no = ?";
+
 
 			//⑥SQLを実行するための準備(構文解析)
 			pstmt = con.prepareStatement(sql);
@@ -447,12 +458,35 @@ public class DaoText {
 			pstmt.setString(1, n.getName());
 			pstmt.setString(2, n.getMail());
 			pstmt.setString(3, n.getText());
-			pstmt.setString(4, n.getNo());
+
+			if(n.getCFile().equals("未選択")){
+				pstmt.setString(4, null);
+			}else if(n.getCFile().equals("選択")){
+				pstmt.setString(4, n.getFile());
+			}
+
+			pstmt.setString(5, n.getNo());
 
 
 			//⑧SQLを実行し、DBから結果を受領する
 			int result = pstmt.executeUpdate();
 			System.out.println(result + "件更新されました。");
+
+			if(n.getFile() == null){
+				sql = "UPDATE bulletinboard SET file = null WHERE no = ?";
+
+				//⑥SQLを実行するための準備(構文解析)
+				pstmt = con.prepareStatement(sql);
+
+				//⑦プレースホルダに値を設定
+				//第1引数→何番目の?に設定するか(1から数える)
+				//第2引数→?に設定する値
+				pstmt.setString(1, n.getNo());
+
+				//⑧SQLを実行し、DBから結果を受領する
+				result = pstmt.executeUpdate();
+
+			}
 
 		}  catch (SQLException e){
 			System.out.println("DBアクセスに失敗しました。");

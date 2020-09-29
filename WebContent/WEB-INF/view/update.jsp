@@ -34,7 +34,7 @@
 		}
 	}
 %>
-	<form  action="/BulletinBoard/UpdateResult" method="post" id="post">
+	<form  action="/BulletinBoard/UpdateResult" method="post" id="post" enctype="multipart/form-data">
 		<input type="hidden" name="no" value="<%=no %>">
         投稿者<br>
         <input type="text" style="width:200px;" name="name"><br>
@@ -42,6 +42,20 @@
         <input type="text" style="width:200px;" name="mal"><br>
         内容<br>
         <textarea type="text" style="width:300px;height:100px;" name="text" wrap="hard"></textarea><br>
+
+     	ファイル<br>
+     	<input type="radio" id = "Cfile" name="Cfile" value="選択"
+			onclick="document.getElementById('xyz').style.display = 'inline-block';"
+			>ファイル選択
+
+		<input type="radio" id = "Cfile" name="Cfile" value="未選択" checked="checked"
+			onclick="document.getElementById('xyz').style.display = 'inline-block';"
+			>ファイル未選択
+
+        <br>
+        <input type="text" style="width:200px;" name="fname">
+        <input type="FILE" style="width:250px;" name="file"><br>
+
         <r><input type="submit" value="投稿"></r>
     </form>
     <br><br>
@@ -66,6 +80,20 @@
 			<tr>
 				<td class="text" colspan="100"><%=text.getText() %></td>
 			</tr>
+
+<%			if(text.getFile() != null){
+%>
+			<tr>
+				<td class="text" colspan="100"><%=text.getFile() %></td>
+			</tr>
+			<tr>
+				<td class="text" colspan="100">
+					<img src="./upload/<%=text.getFile() %>"
+					alt="ファイル">
+				</td>
+			</tr>
+<%			}
+%>
 
 			<tr class="under">
 				<td class="num"><%=text.getNo() %></td>

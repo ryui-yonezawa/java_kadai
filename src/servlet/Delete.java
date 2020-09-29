@@ -1,6 +1,8 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bean.BoardBean;
 import dao.DaoText;
 
 /**
@@ -36,6 +39,17 @@ public class Delete extends HttpServlet {
 		String noStr = request.getParameter("no");
 
 		int no = Integer.parseInt(noStr);
+
+		ArrayList<BoardBean> Nfile = DaoText.selecttext(no);
+
+		BoardBean Nfile2 = Nfile.get(0);
+
+		String Nfile3 = "C:/pleiades/workspace/BulletinBoard/WebContent/upload/"+Nfile2.getFile();
+        File file = new File(Nfile3);
+
+        //deleteメソッドを使用してファイルを削除する
+        file.delete();
+
 
 		DaoText.deletetext(no);
 

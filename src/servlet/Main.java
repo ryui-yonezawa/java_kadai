@@ -39,8 +39,10 @@ public class Main extends HttpServlet {
 		//今までの掲示板情報を取得
 		ArrayList<BoardBean> list = DaoText.selectAlltext();
 
+		ArrayList<BoardBean> flist = list;
+
 		//リクエストスコープへ保存
-		request.setAttribute("list",list);
+		request.setAttribute("list",flist);
 
 		//投稿画面へフォワードする。
 		String view = "/WEB-INF/view/post.jsp";

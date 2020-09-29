@@ -15,7 +15,6 @@
 <body>
 <f1>
 
-
 	<button><a href="/BulletinBoard/Main">TOP画面へ</a></button><br>
 
 	<p>投稿内容をここに表示</p>
@@ -37,6 +36,20 @@
 			<tr>
 				<td class="text" colspan="100"><%=text.getText() %></td>
 			</tr>
+
+<%			if(text.getFile() != null){
+%>
+			<tr>
+				<td class="text" colspan="100"><%=text.getFile() %></td>
+			</tr>
+			<tr>
+				<td class="text" colspan="100">
+					<img src="./upload/<%=text.getFile() %>"
+					alt="ファイル">
+				</td>
+			</tr>
+<%			}
+%>
 
 			<tr class="under">
 				<td class="num"><%=text.getNo() %></td>

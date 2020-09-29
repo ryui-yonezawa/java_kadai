@@ -1,17 +1,18 @@
 package bean;
 
-import java.io.InputStream;
-
 public class BoardBean {
 
 	String no;
 	String name;
 	String mail;
 	String text;
-	InputStream file;
-	byte[] bfile;
+//	InputStream file;
+//	byte[] bfile;
+	String file;
 	String insert_time;
 	String updated_time;
+
+	String Cfile;
 
 	public BoardBean(String name, String mail, String text) {
 		this.name = name;
@@ -19,28 +20,55 @@ public class BoardBean {
 		this.text = text;
 	}
 
-	public BoardBean(String name, String mail, String text, InputStream file) {
+//	public BoardBean(String name, String mail, String text, InputStream file) {
+//		this.name = name;
+//		this.mail = mail;
+//		this.text = text;
+//		this.file = file;
+//	}
+
+	public BoardBean(String name, String mail, String text, String file) {
 		this.name = name;
 		this.mail = mail;
 		this.text = text;
 		this.file = file;
 	}
 
-	public BoardBean(String no, String name, String mail, String text, InputStream file) {
+//	public BoardBean(String no, String name, String mail, String text, InputStream file) {
+//		this.no = no;
+//		this.name = name;
+//		this.mail = mail;
+//		this.text = text;
+//		this.file = file;
+//	}
+
+	public BoardBean(String no, String name, String mail, String text, String file, String Cfile) {
 		this.no = no;
 		this.name = name;
 		this.mail = mail;
 		this.text = text;
 		this.file = file;
+		this.Cfile = Cfile;
 	}
 
-	public BoardBean(String no, String name, String mail, String text, byte[] bfile,
+//	public BoardBean(String no, String name, String mail, String text, byte[] bfile,
+//			String insert_time, String updated_time) {
+//		this.no = no;
+//		this.name = name;
+//		this.mail = mail;
+//		this.text = text;
+//		this.bfile = bfile;
+//		this.insert_time = insert_time;
+//		this.updated_time = updated_time;
+//	}
+
+	public BoardBean(String no, String name, String mail, String text, String file,
 			String insert_time, String updated_time) {
 		this.no = no;
 		this.name = name;
 		this.mail = mail;
 		this.text = text;
-		this.bfile = bfile;
+		this.file = file;
 		this.insert_time = insert_time;
 		this.updated_time = updated_time;
 	}
@@ -68,14 +96,24 @@ public class BoardBean {
 	public void setText(String text) {this.text = text;}
 
 
-	public InputStream getFile() {return file;}
+//	public InputStream getFile() {return file;}
+//
+//	public void setFile(InputStream file) {this.file = file;}
+//
+//
+//	public byte[] getBFile() {return bfile;}
+//
+//	public void setBFile(byte[] file) {this.bfile = bfile;}
 
-	public void setFile(InputStream file) {this.file = file;}
+
+	public String getFile() {return file;}
+
+	public void setFile(String file) {this.file = file;}
 
 
-	public byte[] getBFile() {return bfile;}
+	public String getCFile() {return Cfile;}
 
-	public void setBFile(byte[] file) {this.bfile = bfile;}
+	public void setCFile(String Cfile) {this.Cfile = Cfile;}
 
 
 	public String getInsert_time() {return insert_time;}
